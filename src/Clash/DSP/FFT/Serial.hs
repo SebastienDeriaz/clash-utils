@@ -14,13 +14,22 @@ import Clash.DSP.Complex
 import Clash.DSP.FFT.Butterfly
 
 fftBase 
-    :: (HiddenClockResetEnable dom, Num a, NFDataX a) 
+    :: forall dom a . (HiddenClockResetEnable dom, Num a, NFDataX a) 
     => Signal dom Bool 
     -> Signal dom (Complex a, Complex a) 
     -> Signal dom (Complex a, Complex a)
-fftBase en = delayEn (errorX "initial fftBase", errorX "initial fftBase") en . fmap func
+--fftBase en = delayEn (errorX "initial fftBase", errorX "initial fftBase") en . fmap func
+fftBase en a = reg
     where
-    func (x, y) = (x + y, x - y)
+        reg = register initial next
+
+        initial :: (Complex a, Complex a)
+        initial = (0, 0)
+
+        next :: Signal dom (Complex a, Complex a)
+        next = mux en (func <$> a) reg
+
+        func (x, y) = (x + y, x - y)
 
 {-
  -                                 |\     _______

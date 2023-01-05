@@ -1,3 +1,8 @@
 .stack-work
 dist-newstyle
+
+# Nix flake
 .direnv
+
+# Python
+__pycache__

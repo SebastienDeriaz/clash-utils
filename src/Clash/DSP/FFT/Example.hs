@@ -17,7 +17,7 @@ fftSerialDIT
     -> Signal dom Bool                   -- ^ Input enable signal
     -> Signal dom (Complex a, Complex a) -- ^ Pair of input samples
     -> Signal dom (Complex a, Complex a) -- ^ Pair of output samples
-fftSerialDIT twiddles en input  
+fftSerialDIT twiddles en input
     = fftBase en input
     & fftSerialDITStep ditButterfly cexp2    stage2En
     & fftSerialDITStep ditButterfly twiddles stage3En

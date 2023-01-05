@@ -1,4 +1,4 @@
-{-# LANGUAGE UndecidableInstances #-} --For the BitPack instance
+{-# LANGUAGE UndecidableInstances, StandaloneDeriving, DeriveFunctor, DeriveFoldable, DeriveTraversable #-} --For the BitPack instance
 module Clash.DSP.Complex where
 
 import Clash.Prelude
